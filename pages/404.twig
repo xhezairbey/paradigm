@@ -1,0 +1,18 @@
+{% extends "layouts/default.twig" %}
+
+<!-- todo: add rotator here -->
+
+{% block content %}
+    <article id="post-not-found" class="post">
+    	<header class="posthead">
+      	<h2 class="bigger">${ "404 Error Page Not Found!" | translate }</h2>
+      </header>
+      
+      <section class="post-content">
+      	<p>It seems like this post is missing somewhere. Double-check the URL or try navigating back via the website menu links.</p>
+      </section>
+    </article>
+
+
+  <div class="post body">${ "Sorry, but you are looking for something that isn't here." | translate }</div>
+{% endblock %}
