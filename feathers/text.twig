@@ -1,0 +1,15 @@
+{% extends "content/post.twig" %}
+
+{% block content %}
+  <header class="posthead">
+{% if post['title'] %}<h2><a href="$post.url" rel="bookmark" title="$post.title">$post.title</a></h2>{% endif %}
+		<span class="meta">
+			<i>Published <time datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate>${ post.created_at | strftime("%d %B %Y") }</time> by $post.author.name .</i>
+			<i>Filed under <a href="#" rel="category"><?php the_category(', '); ?></a>. Total of <a href="<?php comments_link(); ?> "><?php comments_number( 'no comments', '1 comment', '% comments' ); ?></a> in the discussion.<?php edit_post_link('Admin Edit', ' ', '.'); ?></i>
+		</span>
+	</header>
+
+	<section class="post-content clearfix">
+		${ post.body | read_more }
+	</section>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>{% block title %}{% if title %} &raquo; ${ title | escape }{% endif %}$site.name{% endblock %}</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="description" content="$site.description" />
+  <meta name="generator" content="Chyrp" />
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="$site.url/favicon.ico">
+  <link rel="icon" href="$site.url/favicon.ico">
+  <link rel="pingback" href="$site.chyrp_url/includes/xmlrpc.php" />
+  <link rel="EditURI" type="application/rsd+xml" href="$site.chyrp_url/includes/rsd.php" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quando">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+<!--  <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>-->
+  $theme.feeds
+  $theme.stylesheets
+  $theme.javascripts
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  ${ trigger.call("head") }
+</head>
+<body class="{% if route.action == 'index' %}index{% endif %}{% if route.action == 'view' %}view{% endif %}{% if route.action == 'page' %}page{% endif %}">
+  <!-- header -->
+  {% include "content/header.twig" %}
+  
+  <!-- content -->
+  <div id="content" class="wrapper">
+    <!-- sidebar -->
+    {% include "content/sidebar.twig" %}
+    
+    <div id="main">
+    {% block content %}{% endblock %}
+  
+    <!-- paginator -->
+    <div id="navbelow" class="clearfix">
+      <div class="nav-prev">$posts.prev_link</div>
+      {# if posts.paginated and posts.pages > 1 #}
+      <!-- <p>${ "Page %d of %d" | translate | format(posts.page, posts.pages) }</p> -->
+      {# endif #}
+      <div class="nav-next">$posts.next_link</div>
+    </div>
+
+    ${ trigger.call("end_content") }
+    </div> <!-- /#main -->
+  </div> <!-- /#content -->
+		
+  <br style="clear:both;">
+  <!-- sidebar-responsive -->
+  {% include "content/sidebar-responsive.twig" %}
+  <!-- footer -->
+  {% include "content/footer.twig" %}
+  <!-- debug -->
+  {% include "partials/debug.twig" %}
+  <!-- Queries: $sql_queries | Load Time: $theme.load_time -->
+</body>
+</html>

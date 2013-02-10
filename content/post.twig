@@ -1,0 +1,37 @@
+<!-- begin pages/post.twig -->
+<article id="post_$post.id" class="post postbrdr $post.feather{% if post.pinned %} pinned{% endif %}{% if post.status == 'private' %} private{% endif %}{% if post.status == 'scheduled' %} scheduled{% endif %}" role="article">
+    {% block content %}{% endblock %}
+    <header class="posthead">
+        {% if post['title'] %}
+        <h2><a href="$post.url" rel="bookmark" title="$post.title">$post.title</a></h2>
+        {% endif %}
+		<span class="meta">
+			<i>Published <time datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate>${ post.created_at | strftime("%d %B %Y") }</time> by $post.author.name .</i>
+			<i>Filed under <a href="#" rel="category"><?php the_category(', '); ?></a>. Total of <a href="<?php comments_link(); ?> "><?php comments_number( 'no comments', '1 comment', '% comments' ); ?></a> in the discussion.<?php edit_post_link('Admin Edit', ' ', '.'); ?></i>
+		</span>
+	</header>
+
+	<section class="post-content clearfix">
+		${ post.body | read_more }
+	</section>
+    {% if route.action == "view" and post.paginated and post.paginated.pages > 1 %}
+        $post.paginated.prev_link
+        $post.paginated.next_link
+        <span class="pages">${ "Page %d of %d" | translate | format(post.paginated.page, post.paginated.pages) }</span>
+    {% endif %}
+</article>
+  
+  {% if route.action == "view" and post.paginated and post.paginated.pages > 1 %}
+    $post.paginated.prev_link
+    $post.paginated.next_link
+    <span class="pages">${ "Page %d of %d" | translate | format(post.paginated.page, post.paginated.pages) }</span>
+  {% endif %}
+
+<!--   <footer>
+    <p>${ post.created_at | strftime("%B %d" | translate) }</p>
+    {% if enabled_modules.comments and visitor.group.can("add_comment") %}<p class="comment_count"><a href="$post.url#comments"> ${ "%s Comment" | translate_plural("%s Comments", post.comment_count) | format(post.comment_count) }</a></p>{% endif %}
+    {% if enabled_modules.likes and visitor.group.can("like_post") %}<p class="like_count">$post.getLikes</p>{% endif %}
+    {% if enabled_modules.categorize and post.category.id != 0 %}<p class="category has_icon icon_category"><a href="$post.category.url" rel="tag">$post.category.name</a></p>{% endif %}
+    {% if post.linked_tags | length > 0 %}<p class="tags">${ "Tags" | translate }: ${ post.linked_tags | join(" ") }</p>{% endif %}                                         
+    {% if post.editable or post.deletable %}<p class="controls">$post.edit_link ${ post.delete_link("Delete" | translate, " | ") }</p>{% endif %}
+  </footer> -->

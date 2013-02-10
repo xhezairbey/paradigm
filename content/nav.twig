@@ -1,0 +1,12 @@
+    {% if theme.pages_list %}
+    <nav>
+        <ul>
+        {% for item in theme.pages_list %}
+            <li><a href="$item.page.url">$item.page.title</a>
+              {% if item.has_children %}<ul>{% endif %}
+                  {% if not item.has_children %}</li>{% endif %}
+              {% for ul, li in item.end_tags %} $ul $li {% endfor %}
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}

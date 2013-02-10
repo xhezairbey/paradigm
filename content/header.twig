@@ -1,0 +1,17 @@
+    <nav id="n">
+        {% include "partials/admin.twig" %}
+    </nav>
+
+    <div id="navbar"><a href="#">Nav Menu</a>
+        {% include "content/nav.twig" %}
+    </div>
+
+    <!-- system messages -->
+    {% include "content/message.twig" %}
+    
+    <div id="mainbody">
+        <header id="top">
+            <div class="wrapper">
+                <h1><a href="$site.url">$site.name</a></h1>
+            </div>
+        </header>

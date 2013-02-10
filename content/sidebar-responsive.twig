@@ -1,0 +1,29 @@
+    <aside id="sidebar-responsive" class="wrapper" role="complementary">
+        {% if categorize %}
+        <div class="widget category_list">
+            <h3 class="wtitle">${ "Blog Categories" | translate }</h3>
+            <ul id="categorize">
+                {% for cat in categorize %}
+                <li>
+                    <a href="{% url "category/" ~ cat.clean %}">${ cat.name }</a>
+                    <span class="sub">($cat.total)</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if theme.archives_list %}
+        <div id="widget archive_list">
+			<h3 class="title">${ "Post Archives" | translate }</h3>
+            <ul>
+                {% for archive in theme.archives_list %}
+                <li>
+                    <a href="$archive.url">${ archive.when | strftime("%B %Y" | translate) }</a>
+                    <span class="sub">($archive.count)</span>
+                </li>
+                {% endfor %}
+                <li><a href="{% url "archive" %}">${ "All &rarr;" | translate }</a></li>
+            </ul>
+        </div>
+        {% endif %}
+    </aside><!-- /#sidebar-responsive -->

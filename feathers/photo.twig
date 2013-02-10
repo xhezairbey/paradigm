@@ -1,0 +1,6 @@
+{% extends "content/post.twig" %}
+
+{% block content %}
+  ${ feathers['photo'].image_link(post, 640) }
+  ${ post.caption | read_more }
+{% endblock %}
